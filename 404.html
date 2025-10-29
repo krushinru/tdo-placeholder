@@ -1,79 +1,88 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <title>t-do – твой главный сервис для Telegram</title>
-    <style>
-        /* Reset default browser styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        /* Body styling */
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: #ffffff;
-            color: #000000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-        }
-        /* Container styling */
-        .container {
-            max-width: 600px;
-            padding: 20px;
-            text-align: center;
-        }
-        /* Heading styles */
-        h1 {
-            font-size: 2.5rem;
-            font-weight: normal;
-            margin-bottom: 1rem;
-        }
-        /* Paragraph styles */
-        p {
-            font-size: 1.25rem;
-            line-height: 1.6;
-            margin-bottom: 1rem;
-        }
-        /* Link styles */
-        a {
-            color: inherit;
-            text-decoration: none;
-            border-bottom: 1px solid #000;
-        }
-        a:hover {
-            border-bottom: none;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Привет</h1>
-        <p>
-            С 2018 по 2021 год на этом сайте работал один из самых крупных сервисов по обходу блокировок Telegram в России. Прочитать о нем, например, можно на <a href="https://click-or-die.ru/2018/06/servisom-polzuetsya-vasilij-utkin-kto-i-kak-spas-telegram-dlya-vneshnego-mira/">Палаче</a>. 
-        </p>
-        <p>
-            Возможно совсем скоро здесь появится что-то новое.
-        </p>
-    </div>
-    <!-- Yandex.Metrika counter -->
-    <script type="text/javascript" >
-        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-        m[i].l=1*new Date();
-        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+  <!-- SEO Meta Tags -->
+  <title>Открыть в Telegram</title>
+  <meta name="description" content="Автоматическое открытие ссылки в приложении Telegram">
+  
+  <!-- Bootstrap 5.3.3 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
     
-        ym(54236968, "init", {
-            clickmap:true,
-            trackLinks:true,
-            accurateTrackBounce:true
-        });
-    </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/54236968" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-    <!-- /Yandex.Metrika counter -->
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      padding: 40px 15px;
+    }
+    
+    .fuckrkn {
+      width: 100%;
+      max-width: 380px;
+      padding: 15px;
+      margin: auto;
+      text-align: center;
+    }
+    
+    .btn-primary {
+      background-color: #3390ec;
+      border: none;
+      border-radius: 10px;
+      padding: 14px 24px;
+      font-weight: 500;
+      font-size: 17px;
+      transition: opacity 0.2s;
+      box-shadow: 0 2px 8px rgba(51, 144, 236, 0.25);
+    }
+    
+    .btn-primary:hover {
+      background-color: #3390ec;
+      opacity: 0.9;
+    }
+  </style>
+</head>
+
+<body class="text-center">
+  <div class="fuckrkn">
+    <a id="abc" class="btn btn-lg btn-primary w-100">Открыть в Telegram</a>
+  </div>
+  
+  <script>
+    var url = window.location.pathname.split("/");
+    switch(url[1]) {
+      case "socks":
+        var str = "tg://socks" + window.location.search;
+        break;
+      case "share":
+        str = "tg://msg_" + url[2] + window.location.search;
+        break;
+      case "joinchat":
+        str = "tg://join?invite=" + url[2];
+        break;
+      case "addstickers":
+        str = "tg://addstickers?set=" + url[2];
+        break;
+      case "proxy":
+        str = "tg://" + url[1] + window.location.search;
+        break;
+      default:
+        str = "tg://resolve?domain=" + url[1] + window.location.search.replace("?start=", "&start=");
+        url[2] && (str = str + "&post=" + url[2]);
+    }
+    document.getElementById("abc").href = str;
+    setTimeout(function() {
+      window.location.replace(str);
+    }, 10);
+  </script>
 </body>
 </html>
